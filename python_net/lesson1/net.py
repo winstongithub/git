@@ -8,9 +8,8 @@ try:
 except socket.gaierror , e:
 	print (" Error connecting to server: %s ", e )
 	sys.exit(1)
-s.sendall( filename + "\r\n")
-while 1:
-	buf = s.recv( 2048 )
-	if not len( buf ):
-		break;
-	sys.stdout.write(buf)
+fd = s.makefile( 'rw' , 0 )
+fd.write( filename + "\r\n" )
+for line in fd.readlines():
+	sys.stdout.write(line)
+
