@@ -1,1 +1,1 @@
-python net.py quux.org /
+python client.py quux.org /
