@@ -118,9 +118,10 @@ class Spider:
             #item[0]个人详情URL,item[1]头像URL,item[2]姓名,item[3]年龄,item[4]居住地
             print u"发现一位模特,名字叫",item[2],u"芳龄",item[3],u",她在",item[4]
             print u"正在偷偷地保存",item[2],"的信息"
+	    item[0] ="http:"+ item[0] 
             print u"又意外地发现她的个人地址是",item[0]
             #个人详情页面的URL
-            detailURL = item[0]
+            detailURL =  item[0]
             #得到个人详情页面代码
             detailPage = self.getDetailPage(detailURL)
             #获取个人简介
