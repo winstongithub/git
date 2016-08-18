@@ -1,12 +1,12 @@
-from orm import Model, StringField, IntegerField
+import orm
+from models import User, Blog, Comment
 
-class User(Model):
-    __table__ = 'users'
+def test():
+    yield from orm.create_pool(user='www-data', password='www-data', db='awesome')
 
-    id = IntegerField(primary_key=True)
-    name = StringField()
+    u = User(name='Test', email='test@example.com', passwd='1234567890', image='about:blank')
 
-# 创建实例:
-user = User(id=123, name='Michael')
-# 存入数据库:
-user.save()
+    yield from u.save()
+
+for x in test():
+    pass
