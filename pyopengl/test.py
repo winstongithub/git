@@ -33,13 +33,20 @@ def rotate( x=None , y=None , z=None ):
                       ,[0,0,1,0],[0,0,0,1]],float),mat4)
     return mat4
                      
-
+def scale( x=1 , y=1 ,z=1 ):
+    mat4=np.eye(4)
+    mat4[0][0] = x
+    mat4[1][1] = y
+    mat4[2][2] = z
+    return mat4
+    
 vertexbuffer = 0;
 
 def runModelTrans( g):
     array = transToArray( g , 3 )
     transMat = transle(x=0.4 , y=0.4,z=0.4)
     transMat = np.dot(rotate(np.pi,np.pi,np.pi) , transMat)
+    transMat = np.dot( scale( 0.4 ,0.4 ,0.4 ) , transMat)
     newList=[]
     for i in range( 0 , len(array)):
         perArray = np.dot( transMat , array[i])
