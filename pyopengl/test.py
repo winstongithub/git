@@ -19,11 +19,27 @@ def transle( x=0 , y=0 , z=0 ):
     mat4[2][3]=z
     return mat4
 
+def rotate( x=None , y=None , z=None ):
+    mat4=np.eye(4)
+    if x != None:
+        mat4= np.dot(np.array([[ 1,0,0,0],[0,np.cos(x),-np.sin(x),0]
+                      ,[0,np.sin(x),np.cos(x),0],[0,0,0,1]],float),mat4)
+    if y != None:
+        mat4= np.dot(np.array([[ np.cos(y),0,np.sin(y),0],[0,1,0,0]
+                      ,[-np.sin(y),0,np.cos(y),0],[0,0,0,1]],float),mat4)
+
+    if z != None:
+        mat4= np.dot(np.array([[ np.cos(z),-np.sin(x),0,0],[np.sin(z),np.cos(x),0,0]
+                      ,[0,0,1,0],[0,0,0,1]],float),mat4)
+    return mat4
+                     
+
 vertexbuffer = 0;
 
 def runModelTrans( g):
     array = transToArray( g , 3 )
     transMat = transle(x=0.4 , y=0.4,z=0.4)
+    transMat = np.dot(rotate(np.pi,np.pi,np.pi) , transMat)
     newList=[]
     for i in range( 0 , len(array)):
         perArray = np.dot( transMat , array[i])
