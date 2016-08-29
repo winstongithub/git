@@ -1,12 +1,34 @@
 from OpenGL.GL import *
 from OpenGL.GLU import *
 from OpenGL.GLUT import *
-from ctypes import sizeof, c_float, c_void_p, c_uint
-null = c_void_p(0)
+from OpenGL.GL.shaders import compileShader, compileProgram
+strVertexShader = """
+#version 120
+
+in vec4 position;
+void main()
+{
+   gl_Position = position;
+}
+"""
+strFragmentShader = """
+#version 120
+
+out vec4 outputColor;
+void main()
+{
+   outputColor = vec4(1.0f, 0.0f, 0.0f, 1.0f);
+}
+"""
 
 vertexbuffer = 0;
-
+shader = None
 def init():
+    global shader
+    shader = compileProgram(
+            compileShader( strVertexShader , GL_VERTEX_SHADER ) ,
+            compileShader( strFragmentShader , GL_FRAGMENT_SHADER)
+        )
     global vertexbuffer
     vertexbuffer = glGenBuffers(1)
     glBindBuffer(GL_ARRAY_BUFFER, vertexbuffer);
@@ -18,6 +40,7 @@ def init():
 def Draw():
     glClearColor(0.0, 0.0, 0.0, 0.0)
     glClear(GL_COLOR_BUFFER_BIT)
+    glUseProgram(shader)
     glBindBuffer(GL_ARRAY_BUFFER, vertexbuffer)
     glEnableVertexAttribArray(0)
     glVertexAttribPointer(
@@ -30,6 +53,7 @@ def Draw():
 		)
     glDrawArrays(GL_TRIANGLES, 0, 3);
     glDisableVertexAttribArray(0);
+    glUseProgram(0)
     glFlush()
 
 if __name__=="__main__":
