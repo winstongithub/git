@@ -51,6 +51,7 @@ def runModelTrans( g):
     transMat = np.dot( setLookAtMat( 0 , 0 , 0 , 0,0,1, 0 ,1,0) ,transMat )
     transMat = np.dot( preProjectionMatrix( np.pi/4 , 1 , 1, 1000),transMat)
     newList=[]
+
     for i in range( 0 , len(array)):
         perArray = np.dot( transMat , array[i])
         newList.append( perArray.tolist())
