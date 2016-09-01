@@ -49,6 +49,7 @@ def runModelTrans( g):
     transMat = np.dot(rotate(np.pi,0,0,1) , transMat)
     transMat = np.dot( scale( 0.4 ,0.4 ,0.4 ) , transMat)
     transMat = np.dot( setLookAtMat( 0 , 0 , 0 , 0,0,1, 0 ,1,0) ,transMat )
+    transMat = np.dot( preProjectionMatrix( np.pi/4 , 1 , 1, 1000),transMat)
     newList=[]
     for i in range( 0 , len(array)):
         perArray = np.dot( transMat , array[i])
@@ -83,9 +84,16 @@ def setLookAtMat( eyex ,eyey , eyez , centerx , centery ,centerz , upx , upy , u
     u[3] = y
     d[3] = z
     mat4= np.array([ r , u , d ,[ 0 , 0 , 0 , 1 ] ], float)
-    return mat4.transpose()
+    return mat4
 
-
+def preProjectionMatrix( fov , aspect , zn ,zf ):
+    mat4 = np.eye(4)
+    mat4[0][0] = 1/( np.tan( fov * 0.5) * aspect)
+    mat4[1][1] = 1/ np.tan( fov * 0.5 )
+    mat4[2][2] = zf / (zf - zn)
+    mat4[3][2] = 1.0
+    mat4[2][3] = (zn * zf )/(zn-zf)
+    return mat4
 def init():
     global vertexbuffer
     vertexbuffer = glGenBuffers(1)
