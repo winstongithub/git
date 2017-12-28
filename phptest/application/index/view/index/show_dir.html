@@ -10,10 +10,11 @@
 
 <body>
     {volist name="ret" id="user" }
-    <div href="www.baidu.com" class="info">
-        文件名：{$user.filename}           文件大小：{$user.size}M
+    <div  class="info">
+        文件名：{$user.filename}           文件大小：{$user.size}M 修改时间:{$user.date}
         <br/> 
     </div>
+   
     {/volist}
 </body>
 

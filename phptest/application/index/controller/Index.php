@@ -33,6 +33,7 @@ class Index extends Controller
                 $fstat = fstat($handle);
                 $fileinfo['filename'] = $value;
                 $fileinfo['size'] = round($fstat["size"]/1024,2);
+                $fileinfo['date'] = date("Y-m-d h:i:s",$fstat["mtime"]);
                 array_push($ret,$fileinfo);
             }
             $this->assign("ret",$ret);
