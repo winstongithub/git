@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+
+<body>
+    {volist name="ret" id="user" }
+    <div href="www.baidu.com" class="info">
+        文件名：{$user.filename}           文件大小：{$user.size}M
+        <br/> 
+    </div>
+    {/volist}
+</body>
+
+</html>
