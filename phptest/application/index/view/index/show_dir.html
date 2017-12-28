@@ -6,16 +6,34 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Document</title>
+    <style>
+        p {
+            font-size: 14px;
+            line-height: 22px;
+        }
+
+        a {
+            text-decoration: none;
+            margin-right: 40px;
+        }
+
+        .file-size {
+            display: inline-block;
+            width: 220px;
+        }
+    </style>
 </head>
 
 <body>
     {volist name="ret" id="user" }
-    <a href="/static/data/{$user.filename}" style="text-decoration:none" >
-    <div  class="info">
-        文件名：{$user.filename}           文件大小：{$user.size}K 修改时间:{$user.date}
-        <br/> 
-    </div>
-    </a>
+    <p>
+        <a href="/static/data/{$user.filename}" style="text-decoration:none">
+            <div class="info">
+                文件名：{$user.filename} 文件大小：{$user.size}K 修改时间:{$user.date}
+                <br/>
+            </div>
+        </a>
+    </p>
     {/volist}
 </body>
 
