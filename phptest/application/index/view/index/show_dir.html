@@ -10,11 +10,12 @@
 
 <body>
     {volist name="ret" id="user" }
+    <a href="/static/data/{$user.filename}" style="text-decoration:none" >
     <div  class="info">
-        文件名：{$user.filename}           文件大小：{$user.size}M 修改时间:{$user.date}
+        文件名：{$user.filename}           文件大小：{$user.size}K 修改时间:{$user.date}
         <br/> 
     </div>
-   
+    </a>
     {/volist}
 </body>
 
