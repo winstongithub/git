@@ -1,15 +1,12 @@
-import socket , sys
-textport = sys.argv[2]
+import socket , sys,time
+host = "192.168.117.33"
+port = 10001
 s= socket.socket(socket.AF_INET , socket.SOCK_DGRAM)
-port = int(textport)
 s.connect( (host,port) )
-print( "enter data to transmit:" )
-data = sys.stdin.readline().strip()
-s.sendall(data)
-print ("looking for replies")
-while 1:
+a=time.time()
+for i in range(0,100):
+	s.sendall(b"hello world")
 	buf = s.recv(2048)
-	if not len( buf ):
-		break;
-	sys.stdout.write(buf)
+	#print(buf)
+print("finish",time.time()-a)
 	
